@@ -4,1198 +4,848 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI SDK Product Ideas — High-Demand Opportunities</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+:root {
+  --bg:       #08080a;
+  --bg-2:     #0d0d11;
+  --bg-3:     #111117;
+  --bg-h:     #16161e;
+  --border:   rgba(255,255,255,0.06);
+  --border-2: rgba(255,255,255,0.13);
+  --t1: #ecedf0;
+  --t2: #7a7a90;
+  --t3: #48485e;
+  --accent:     #5f74f8;
+  --accent-dim: rgba(95,116,248,0.1);
+  --green:     #3fa877;
+  --green-dim: rgba(63,168,119,0.08);
+  --orange:    #d4894a;
+  --orange-dim:rgba(212,137,74,0.08);
+  --red:       #d05555;
+  --red-dim:   rgba(208,85,85,0.08);
+  --mono: 'SF Mono','Fira Code','Fira Mono',monospace;
+}
 
-  :root {
-    --bg: #0a0a0b;
-    --surface: #141416;
-    --surface2: #1c1c20;
-    --border: #2a2a30;
-    --text: #e8e8ed;
-    --text-muted: #8b8b97;
-    --accent: #6366f1;
-    --accent-light: #818cf8;
-    --green: #22c55e;
-    --orange: #f59e0b;
-    --red: #ef4444;
-    --cyan: #06b6d4;
-    --pink: #ec4899;
-  }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family:'Inter',-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--t1);
+  line-height:1.5;
+  font-size:15px;
+  overflow-x:hidden;
+}
 
-  body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+/* Linear dot-grid */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,0.028) 1px,transparent 1px);
+  background-size:28px 28px;
+  pointer-events:none;
+  z-index:0;
+}
 
-  /* Hero */
-  .hero {
-    position: relative;
-    padding: 80px 40px 60px;
-    text-align: center;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 16px;
-    background: rgba(99,102,241,0.1);
-    border: 1px solid rgba(99,102,241,0.3);
-    border-radius: 100px;
-    font-size: 13px;
-    color: var(--accent-light);
-    margin-bottom: 24px;
-  }
-  .hero h1 {
-    font-size: clamp(32px, 5vw, 56px);
-    font-weight: 800;
-    letter-spacing: -1.5px;
-    line-height: 1.1;
-    margin-bottom: 16px;
-    background: linear-gradient(135deg, #fff 0%, #818cf8 50%, #06b6d4 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .hero p {
-    font-size: 18px;
-    color: var(--text-muted);
-    max-width: 640px;
-    margin: 0 auto 32px;
-  }
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes ping {
+  75%,100% { transform:scale(2.2); opacity:0; }
+}
 
-  /* Stats bar */
-  .stats-bar {
-    display: flex;
-    justify-content: center;
-    gap: 48px;
-    padding: 24px 40px;
-    flex-wrap: wrap;
-  }
-  .stat { text-align: center; }
-  .stat-value {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--accent-light);
-  }
-  .stat-label {
-    font-size: 12px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
-  }
+/* ── Layout ── */
+.wrap {
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 32px;
+  position:relative;
+  z-index:1;
+}
 
-  /* Navigation/Filter */
-  .filter-bar {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    padding: 16px 40px;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    background: rgba(10,10,11,0.85);
-    backdrop-filter: blur(20px);
-    z-index: 100;
-    border-bottom: 1px solid var(--border);
-  }
-  .filter-btn {
-    padding: 8px 18px;
-    border-radius: 100px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text-muted);
-    font-size: 13px;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .filter-btn:hover, .filter-btn.active {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
+/* ── Header (Sinachi backdrop-blur) ── */
+.site-header {
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  background:rgba(8,8,10,0.78);
+  border-bottom:1px solid var(--border);
+}
+.site-header .wrap {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:52px;
+}
+.hdr-name {
+  font-size:13px;
+  font-weight:500;
+  color:var(--t2);
+}
+.hdr-live {
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-size:11px;
+  color:var(--t3);
+  font-family:var(--mono);
+}
+.live-dot {
+  width:6px; height:6px;
+  border-radius:50%;
+  background:var(--green);
+  position:relative;
+  flex-shrink:0;
+}
+.live-dot::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:var(--green);
+  animation:ping 2s cubic-bezier(0,0,0.2,1) infinite;
+}
 
-  /* Container */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 24px;
-  }
+/* ── Hero (Attio dark + Sinachi serif) ── */
+.hero {
+  position:relative;
+  padding:80px 0 68px;
+  z-index:1;
+  overflow:hidden;
+}
+.hero::after {
+  content:'';
+  position:absolute;
+  top:-160px; left:50%;
+  transform:translateX(-50%);
+  width:800px; height:600px;
+  background:radial-gradient(ellipse,rgba(95,116,248,0.06) 0%,transparent 68%);
+  pointer-events:none;
+}
+.hero-eyebrow {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0.13em;
+  text-transform:uppercase;
+  color:var(--t3);
+  font-family:var(--mono);
+  margin-bottom:28px;
+  animation:fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) 0ms both;
+}
+.hero-eyebrow::before {
+  content:'';
+  display:inline-block;
+  width:22px; height:1px;
+  background:var(--t3);
+}
+.hero h1 {
+  font-family:'Lora',Georgia,serif;
+  font-size:clamp(34px,5vw,58px);
+  font-weight:500;
+  line-height:1.1;
+  letter-spacing:-0.025em;
+  color:var(--t1);
+  max-width:680px;
+  text-wrap:balance;
+  margin-bottom:20px;
+  animation:fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) 80ms both;
+}
+.hero h1 em {
+  font-style:italic;
+  color:var(--t2);
+}
+.hero-sub {
+  font-size:16px;
+  color:var(--t2);
+  max-width:520px;
+  line-height:1.7;
+  font-weight:300;
+  text-wrap:pretty;
+  margin-bottom:52px;
+  animation:fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) 160ms both;
+}
+.stats-row {
+  display:flex;
+  gap:44px;
+  flex-wrap:wrap;
+  animation:fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) 240ms both;
+}
+.stat-val {
+  font-family:var(--mono);
+  font-size:21px;
+  font-weight:500;
+  color:var(--t1);
+  letter-spacing:-0.02em;
+}
+.stat-lbl {
+  font-size:11px;
+  color:var(--t3);
+  margin-top:4px;
+  letter-spacing:0.03em;
+}
 
-  /* Section headers */
-  .section-header {
-    margin-bottom: 32px;
-  }
-  .section-header h2 {
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--accent-light);
-    margin-bottom: 8px;
-  }
-  .section-header h3 {
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-  }
+/* ── Dashed divider (Attio) ── */
+.divider {
+  border:none;
+  border-top:1px dashed rgba(255,255,255,0.07);
+  margin:40px 0;
+  position:relative;
+  z-index:1;
+}
 
-  /* Cards */
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 20px;
-    margin-bottom: 64px;
-  }
+/* ── Section label (Sinachi uppercase mono) ── */
+.slabel {
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--t3);
+  font-family:var(--mono);
+  margin-bottom:16px;
+}
 
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px;
-    transition: all 0.3s;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(99,102,241,0.1);
-  }
-  .card.expanded .card-details { display: block; }
-  .card.expanded { grid-column: 1 / -1; }
+/* ── SDK blocks ── */
+.sdk-grid { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:40px; }
+.sdk-block {
+  padding:4px 10px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:4px;
+  font-size:12px;
+  color:var(--t2);
+  font-family:var(--mono);
+  transition:border-color 0.2s, color 0.2s;
+}
+.sdk-block:hover { border-color:var(--border-2); color:var(--t1); }
+.sdk-block strong { color:var(--t1); font-weight:500; }
 
-  .card-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 16px;
-  }
-  .card-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    flex-shrink: 0;
-  }
-  .card-demand {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .demand-high { background: rgba(34,197,94,0.15); color: var(--green); }
-  .demand-very-high { background: rgba(239,68,68,0.15); color: var(--red); }
-  .demand-medium { background: rgba(245,158,11,0.15); color: var(--orange); }
+/* ── Filter bar ── */
+.filter-bar {
+  display:flex;
+  align-items:center;
+  gap:2px;
+  padding:10px 0;
+  margin-bottom:20px;
+  position:sticky;
+  top:52px;
+  background:rgba(8,8,10,0.88);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  z-index:90;
+  border-bottom:1px solid var(--border);
+}
+.filter-label {
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.13em;
+  text-transform:uppercase;
+  color:var(--t3);
+  font-family:var(--mono);
+  margin-right:8px;
+}
+.filter-btn {
+  padding:5px 12px;
+  border-radius:5px;
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--t2);
+  font-size:12px;
+  font-family:'Inter',sans-serif;
+  cursor:pointer;
+  transition:all 0.12s;
+}
+.filter-btn:hover { background:rgba(255,255,255,0.05); color:var(--t1); }
+.filter-btn.active {
+  background:rgba(255,255,255,0.07);
+  border-color:var(--border-2);
+  color:var(--t1);
+  font-weight:500;
+}
 
-  .card-title {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    letter-spacing: -0.3px;
-  }
-  .card-subtitle {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin-bottom: 16px;
-    line-height: 1.5;
-  }
+/* ── Cards grid ── */
+.cards-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:10px;
+  margin-bottom:56px;
+}
+.card {
+  background:var(--bg-3);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:20px;
+  cursor:pointer;
+  transition:border-color 0.3s, transform 0.5s cubic-bezier(0.16,1,0.3,1), background 0.25s;
+  position:relative;
+  overflow:hidden;
+  animation:fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both;
+}
+.card:nth-child(1)  { animation-delay:0ms; }
+.card:nth-child(2)  { animation-delay:55ms; }
+.card:nth-child(3)  { animation-delay:110ms; }
+.card:nth-child(4)  { animation-delay:165ms; }
+.card:nth-child(5)  { animation-delay:220ms; }
+.card:nth-child(6)  { animation-delay:275ms; }
+.card:nth-child(7)  { animation-delay:330ms; }
+.card:nth-child(8)  { animation-delay:385ms; }
+.card:nth-child(9)  { animation-delay:440ms; }
+.card:nth-child(10) { animation-delay:495ms; }
 
-  .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 16px;
-  }
-  .tag {
-    padding: 4px 10px;
-    background: var(--surface2);
-    border-radius: 6px;
-    font-size: 11px;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
+/* top shimmer on hover (Linear-inspired) */
+.card::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(95,116,248,0.5),transparent);
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.card:hover { border-color:var(--border-2); transform:scale(1.016); background:var(--bg-h); }
+.card:hover::before { opacity:1; }
+.card.expanded { grid-column:1/-1; transform:none; }
+.card.expanded .card-details { display:block; }
+.card.expanded .expand-hint { display:none; }
 
-  .card-metrics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-  }
-  .metric { text-align: center; }
-  .metric-value { font-size: 16px; font-weight: 700; }
-  .metric-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.card-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:14px; }
+.card-icon { font-size:20px; line-height:1; }
 
-  .card-details {
-    display: none;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-  }
-  .detail-section {
-    margin-bottom: 16px;
-  }
-  .detail-section h4 {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--accent-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-  .detail-section p, .detail-section li {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-  .detail-section ul {
-    list-style: none;
-    padding: 0;
-  }
-  .detail-section li::before {
-    content: '→ ';
-    color: var(--accent-light);
-  }
+/* Demand pill (Attio pill + Sinachi status dot) */
+.dtag {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:3px 9px;
+  border-radius:20px;
+  font-size:11px; font-weight:500;
+}
+.ddot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+.d-vh { background:var(--red-dim); color:var(--red); }
+.d-vh .ddot { background:var(--red); }
+.d-h  { background:var(--green-dim); color:var(--green); }
+.d-h  .ddot { background:var(--green); }
 
-  .sdk-features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 8px;
-  }
-  .sdk-tag {
-    padding: 4px 10px;
-    background: rgba(99,102,241,0.1);
-    border: 1px solid rgba(99,102,241,0.2);
-    border-radius: 6px;
-    font-size: 11px;
-    color: var(--accent-light);
-    font-weight: 500;
-  }
+.card-title {
+  font-family:'Lora',Georgia,serif;
+  font-size:16px; font-weight:500;
+  color:var(--t1);
+  margin-bottom:7px;
+  line-height:1.3;
+  letter-spacing:-0.01em;
+}
+.card-sub {
+  font-size:13px; color:var(--t2);
+  line-height:1.58; font-weight:300;
+  margin-bottom:14px;
+}
+.card-tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:14px; }
+.tag {
+  padding:2px 8px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:3px;
+  font-size:11px; color:var(--t3);
+  font-family:var(--mono);
+}
+.card-metrics {
+  display:flex; gap:20px; flex-wrap:wrap;
+  padding-top:14px;
+  border-top:1px solid var(--border);
+}
+.mi { display:flex; flex-direction:column; gap:2px; }
+.mv { font-family:var(--mono); font-size:13px; font-weight:500; color:var(--t1); }
+.ml { font-size:10px; color:var(--t3); letter-spacing:0.04em; }
+.expand-hint { font-size:11px; color:var(--t3); margin-top:12px; font-family:var(--mono); }
 
-  /* Expand indicator */
-  .expand-hint {
-    font-size: 12px;
-    color: var(--text-muted);
-    text-align: center;
-    margin-top: 12px;
-    opacity: 0.6;
-  }
-  .card.expanded .expand-hint { display: none; }
+/* ── Expanded detail ── */
+.card-details { display:none; margin-top:24px; padding-top:24px; border-top:1px solid var(--border); }
+.detail-cols { display:grid; grid-template-columns:1fr 1fr; gap:24px 48px; }
+.ds { margin-bottom:20px; }
+.ds h4 {
+  font-size:10px; font-weight:600;
+  letter-spacing:0.13em; text-transform:uppercase;
+  color:var(--t3); font-family:var(--mono);
+  margin-bottom:10px;
+}
+.ds p { font-size:13px; color:var(--t2); line-height:1.65; font-weight:300; }
+.ds ul { list-style:none; display:flex; flex-direction:column; gap:6px; }
+.ds li { display:flex; gap:10px; font-size:13px; color:var(--t2); line-height:1.55; }
+.ds li::before { content:'→'; color:var(--t3); flex-shrink:0; font-family:var(--mono); }
+.ds li strong { color:var(--t1); font-weight:500; }
+.chips { display:flex; flex-wrap:wrap; gap:5px; margin-top:12px; }
+.chip {
+  padding:2px 8px;
+  background:var(--accent-dim);
+  border:1px solid rgba(95,116,248,0.18);
+  border-radius:3px;
+  font-size:11px; color:var(--accent);
+  font-family:var(--mono); font-weight:500;
+}
 
-  /* SDK overview section */
-  .sdk-overview {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px;
-    margin-bottom: 48px;
-  }
-  .sdk-overview h3 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 16px;
-  }
-  .sdk-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 12px;
-  }
-  .sdk-item {
-    padding: 14px;
-    background: var(--surface2);
-    border-radius: 10px;
-    border: 1px solid var(--border);
-  }
-  .sdk-item-name {
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .sdk-item-desc {
-    font-size: 11px;
-    color: var(--text-muted);
-  }
+/* ── Table ── */
+.dtable { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:56px; position:relative; z-index:1; }
+.dtable th {
+  padding:10px 14px; text-align:left;
+  font-size:10px; font-weight:600;
+  color:var(--t3); text-transform:uppercase; letter-spacing:0.1em;
+  font-family:var(--mono);
+  border-bottom:1px solid var(--border-2);
+  white-space:nowrap;
+}
+.dtable td { padding:12px 14px; border-bottom:1px solid var(--border); color:var(--t2); vertical-align:middle; transition:background 0.12s; }
+.dtable td:first-child { color:var(--t1); font-weight:500; }
+.dtable tr:last-child td { border-bottom:none; }
+.dtable tbody tr:hover td { background:var(--bg-3); }
+.td { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:500; padding:2px 8px; border-radius:20px; }
+.td::before { content:''; width:5px; height:5px; border-radius:50%; display:inline-block; flex-shrink:0; }
+.td-vh { background:var(--red-dim); color:var(--red); }
+.td-vh::before { background:var(--red); }
+.td-h  { background:var(--green-dim); color:var(--green); }
+.td-h::before  { background:var(--green); }
+.sg { color:var(--green); }
+.so { color:var(--orange); }
+.sr { color:var(--red); }
 
-  /* Footer */
-  .footer {
-    text-align: center;
-    padding: 48px 24px;
-    border-top: 1px solid var(--border);
-    margin-top: 48px;
-  }
-  .footer p {
-    font-size: 13px;
-    color: var(--text-muted);
-  }
+/* ── Footer ── */
+.footer { padding:32px 0 56px; border-top:1px dashed rgba(255,255,255,0.07); position:relative; z-index:1; }
+.footer p { font-size:12px; color:var(--t3); line-height:1.8; font-family:var(--mono); }
+.footer a { color:var(--accent); text-decoration:none; }
+.footer a:hover { text-decoration:underline; }
 
-  @media (max-width: 768px) {
-    .cards-grid { grid-template-columns: 1fr; }
-    .stats-bar { gap: 24px; }
-    .hero { padding: 48px 20px 40px; }
-  }
+@media (max-width:768px) {
+  .wrap { padding:0 20px; }
+  .cards-grid { grid-template-columns:1fr; }
+  .detail-cols { grid-template-columns:1fr; }
+  .stats-row { gap:24px; }
+  .hero { padding:52px 0 44px; }
+}
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-badge">
-    <span>&#9679;</span> Research Report — March 2026
+<header class="site-header">
+  <div class="wrap">
+    <span class="hdr-name">AI SDK Product Ideas</span>
+    <span class="hdr-live">
+      <span class="live-dot"></span>
+      Research · March 2026
+    </span>
   </div>
-  <h1>Product Ideas Built<br>with the Vercel AI SDK</h1>
-  <p>10 high-demand product opportunities mapped to AI SDK capabilities — with market sizing, technical architecture, and monetization strategies.</p>
-</div>
+</header>
 
-<div class="stats-bar">
-  <div class="stat">
-    <div class="stat-value">$775B</div>
-    <div class="stat-label">AI SaaS Market by 2031</div>
-  </div>
-  <div class="stat">
-    <div class="stat-value">20M+</div>
-    <div class="stat-label">AI SDK Monthly Downloads</div>
-  </div>
-  <div class="stat">
-    <div class="stat-value">10</div>
-    <div class="stat-label">Product Opportunities</div>
-  </div>
-  <div class="stat">
-    <div class="stat-value">50-65%</div>
-    <div class="stat-label">AI SaaS Gross Margins</div>
-  </div>
-</div>
-
-<div class="filter-bar">
-  <button class="filter-btn active" onclick="filterCards('all')">All Ideas</button>
-  <button class="filter-btn" onclick="filterCards('agent')">Agents</button>
-  <button class="filter-btn" onclick="filterCards('tool')">Tool-Calling</button>
-  <button class="filter-btn" onclick="filterCards('structured')">Structured Output</button>
-  <button class="filter-btn" onclick="filterCards('streaming')">Streaming</button>
-  <button class="filter-btn" onclick="filterCards('multimodal')">Multimodal</button>
-</div>
-
-<div class="container">
-
-  <!-- SDK Overview -->
-  <div class="sdk-overview">
-    <h3>AI SDK Building Blocks Used in These Ideas</h3>
-    <div class="sdk-grid">
-      <div class="sdk-item">
-        <div class="sdk-item-name">generateText / streamText</div>
-        <div class="sdk-item-desc">Core text generation — batch or real-time streamed</div>
-      </div>
-      <div class="sdk-item">
-        <div class="sdk-item-name">Structured Output</div>
-        <div class="sdk-item-desc">Zod-validated JSON objects from LLM responses</div>
-      </div>
-      <div class="sdk-item">
-        <div class="sdk-item-name">Tool Calling</div>
-        <div class="sdk-item-desc">LLM invokes external APIs, databases, services</div>
-      </div>
-      <div class="sdk-item">
-        <div class="sdk-item-name">ToolLoopAgent</div>
-        <div class="sdk-item-desc">Multi-step agentic loops with configurable stops</div>
-      </div>
-      <div class="sdk-item">
-        <div class="sdk-item-name">Human-in-the-Loop</div>
-        <div class="sdk-item-desc">Pause agents for approval before sensitive actions</div>
-      </div>
-      <div class="sdk-item">
-        <div class="sdk-item-name">generateImage</div>
-        <div class="sdk-item-desc">Image generation, inpainting, style transfer</div>
-      </div>
-      <div class="sdk-item">
-        <div class="sdk-item-name">AI Gateway</div>
-        <div class="sdk-item-desc">Unified access to 100+ models, caching, routing</div>
-      </div>
-      <div class="sdk-item">
-        <div class="sdk-item-name">Speech / Transcription</div>
-        <div class="sdk-item-desc">Text-to-speech and audio transcription APIs</div>
-      </div>
-      <div class="sdk-item">
-        <div class="sdk-item-name">Provider System</div>
-        <div class="sdk-item-desc">Swap models with one string — zero code changes</div>
-      </div>
-      <div class="sdk-item">
-        <div class="sdk-item-name">SSE Streaming</div>
-        <div class="sdk-item-desc">Server-Sent Events for stable real-time UIs</div>
-      </div>
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">Research Report</div>
+    <h1>Product Ideas Built<br>with the <em>Vercel AI SDK</em></h1>
+    <p class="hero-sub">10 high-demand product opportunities mapped to AI SDK capabilities — with market sizing, technical architecture, and monetization strategies.</p>
+    <div class="stats-row">
+      <div><div class="stat-val">$775B</div><div class="stat-lbl">AI SaaS Market by 2031</div></div>
+      <div><div class="stat-val">20M+</div><div class="stat-lbl">AI SDK Monthly Downloads</div></div>
+      <div><div class="stat-val">10</div><div class="stat-lbl">Product Opportunities</div></div>
+      <div><div class="stat-val">50–65%</div><div class="stat-lbl">AI SaaS Gross Margins</div></div>
     </div>
   </div>
+</section>
 
-  <div class="section-header">
-    <h2>Product Opportunities</h2>
-    <h3>Click any card to expand the full breakdown</h3>
+<div class="wrap">
+
+  <hr class="divider">
+
+  <p class="slabel">AI SDK Building Blocks</p>
+  <div class="sdk-grid">
+    <span class="sdk-block"><strong>generateText</strong> / streamText</span>
+    <span class="sdk-block"><strong>Structured Output</strong> (Zod)</span>
+    <span class="sdk-block"><strong>Tool Calling</strong></span>
+    <span class="sdk-block"><strong>ToolLoopAgent</strong></span>
+    <span class="sdk-block"><strong>Human-in-the-Loop</strong></span>
+    <span class="sdk-block"><strong>generateImage</strong></span>
+    <span class="sdk-block"><strong>AI Gateway</strong></span>
+    <span class="sdk-block"><strong>Speech</strong> / Transcription</span>
+    <span class="sdk-block"><strong>Provider System</strong></span>
+    <span class="sdk-block"><strong>SSE Streaming</strong></span>
+  </div>
+
+  <hr class="divider">
+
+  <p class="slabel" style="margin-bottom:0">Product Opportunities</p>
+  <div class="filter-bar">
+    <span class="filter-label">Filter</span>
+    <button class="filter-btn active" onclick="filterCards('all')">All</button>
+    <button class="filter-btn" onclick="filterCards('agent')">Agents</button>
+    <button class="filter-btn" onclick="filterCards('tool')">Tool-Calling</button>
+    <button class="filter-btn" onclick="filterCards('structured')">Structured Output</button>
+    <button class="filter-btn" onclick="filterCards('streaming')">Streaming</button>
+    <button class="filter-btn" onclick="filterCards('multimodal')">Multimodal</button>
   </div>
 
   <div class="cards-grid" id="cardsGrid">
 
-    <!-- IDEA 1 -->
+    <!-- 1 -->
     <div class="card" data-tags="agent,tool,structured,streaming" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon" style="background:rgba(34,197,94,0.12);">&#128221;</div>
-        <div class="card-demand demand-very-high">&#9650; Very High Demand</div>
-      </div>
+      <div class="card-top"><span class="card-icon">📝</span><span class="dtag d-vh"><span class="ddot"></span>Very High</span></div>
       <div class="card-title">AI Contract Review Platform</div>
-      <div class="card-subtitle">An agent-powered legal tool that automatically parses contracts, highlights risky clauses, suggests edits, and ensures compliance — built for SMBs and startups who can't afford in-house legal.</div>
-      <div class="card-tags">
-        <span class="tag">Legal Tech</span>
-        <span class="tag">B2B SaaS</span>
-        <span class="tag">Compliance</span>
-      </div>
+      <div class="card-sub">Agent-powered legal tool that parses contracts, highlights risky clauses, suggests edits, and ensures compliance — for SMBs who can't afford in-house legal.</div>
+      <div class="card-tags"><span class="tag">Legal Tech</span><span class="tag">B2B SaaS</span><span class="tag">Compliance</span></div>
       <div class="card-metrics">
-        <div class="metric">
-          <div class="metric-value" style="color:var(--green)">$49-299/mo</div>
-          <div class="metric-label">Pricing</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">$15B+</div>
-          <div class="metric-label">TAM</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">Medium</div>
-          <div class="metric-label">Build Complexity</div>
-        </div>
+        <div class="mi"><span class="mv">$49–299/mo</span><span class="ml">Pricing</span></div>
+        <div class="mi"><span class="mv">$15B+</span><span class="ml">TAM</span></div>
+        <div class="mi"><span class="mv">Medium</span><span class="ml">Complexity</span></div>
       </div>
-      <div class="expand-hint">Click to expand →</div>
-      <div class="card-details">
-        <div class="detail-section">
-          <h4>Why This Has High Demand</h4>
-          <p>Law firms and corporations process enormous volumes of contracts. SMBs spend $10K-$50K annually on legal review alone. AI agents can cut this by 80% while catching issues humans miss. The legal AI market is projected to reach $15B by 2030.</p>
+      <div class="expand-hint">↗ expand</div>
+      <div class="card-details"><div class="detail-cols">
+        <div>
+          <div class="ds"><h4>Why High Demand</h4><p>SMBs spend $10K–$50K annually on legal review. AI agents can cut this by 80% while catching issues humans miss. Legal AI market projected to reach $15B by 2030.</p></div>
+          <div class="ds"><h4>Monetization</h4><p>$49/mo (5 contracts), $149/mo (50 contracts), $299/mo (unlimited + API). Upsell enterprise with custom compliance rules and SSO.</p></div>
+          <div class="ds"><h4>Competitive Advantage</h4><p>Focus on a single vertical — SaaS vendor agreements, real estate, or employment. Vertical specialization yields 3–5× higher retention.</p></div>
         </div>
-        <div class="detail-section">
-          <h4>How to Build with AI SDK</h4>
+        <div><div class="ds"><h4>How to Build with AI SDK</h4>
           <ul>
-            <li>Use <strong>ToolLoopAgent</strong> for multi-step contract analysis — extract clauses, classify risk, suggest edits</li>
-            <li>Use <strong>Structured Output (Zod schemas)</strong> to return typed clause objects: {clause, riskLevel, suggestion, jurisdiction}</li>
-            <li>Use <strong>Tool Calling</strong> to integrate legal databases, case law APIs, and compliance checks</li>
-            <li>Use <strong>streamText</strong> for real-time redlining and annotation as the user reads</li>
-            <li>Use <strong>Human-in-the-Loop (needsApproval: true)</strong> before any clause modification is applied</li>
+            <li><strong>ToolLoopAgent</strong> for multi-step analysis — extract clauses, classify risk, suggest edits</li>
+            <li><strong>Structured Output (Zod)</strong> for typed clause objects: {clause, riskLevel, suggestion, jurisdiction}</li>
+            <li><strong>Tool Calling</strong> to integrate legal databases and compliance APIs</li>
+            <li><strong>streamText</strong> for real-time redlining as the user reads</li>
+            <li><strong>Human-in-the-Loop</strong> before any clause modification is applied</li>
           </ul>
-          <div class="sdk-features">
-            <span class="sdk-tag">ToolLoopAgent</span>
-            <span class="sdk-tag">Structured Output</span>
-            <span class="sdk-tag">Tool Calling</span>
-            <span class="sdk-tag">streamText</span>
-            <span class="sdk-tag">Human-in-the-Loop</span>
-          </div>
-        </div>
-        <div class="detail-section">
-          <h4>Monetization</h4>
-          <p>Tiered SaaS: $49/mo (5 contracts), $149/mo (50 contracts), $299/mo (unlimited + API). Upsell enterprise with custom compliance rules and SSO. Usage-based pricing for API access.</p>
-        </div>
-        <div class="detail-section">
-          <h4>Competitive Advantage</h4>
-          <p>Unlike generic AI tools, focus on a single vertical (e.g., SaaS vendor agreements, real estate, employment contracts). Vertical specialization yields 3-5x higher retention.</p>
-        </div>
-      </div>
+          <div class="chips"><span class="chip">ToolLoopAgent</span><span class="chip">Structured Output</span><span class="chip">Tool Calling</span><span class="chip">streamText</span><span class="chip">Human-in-the-Loop</span></div>
+        </div></div>
+      </div></div>
     </div>
 
-    <!-- IDEA 2 -->
+    <!-- 2 -->
     <div class="card" data-tags="agent,tool,streaming,multimodal" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon" style="background:rgba(6,182,212,0.12);">&#128187;</div>
-        <div class="card-demand demand-very-high">&#9650; Very High Demand</div>
-      </div>
+      <div class="card-top"><span class="card-icon">💻</span><span class="dtag d-vh"><span class="ddot"></span>Very High</span></div>
       <div class="card-title">Voice AI Customer Support Agent</div>
-      <div class="card-subtitle">A deploy-in-minutes voice agent that replaces call center queues — handles inbound calls, resolves tickets, escalates to humans, and integrates with existing CRMs and helpdesks.</div>
-      <div class="card-tags">
-        <span class="tag">Voice AI</span>
-        <span class="tag">Support</span>
-        <span class="tag">Call Center</span>
-      </div>
+      <div class="card-sub">Deploy-in-minutes voice agent that replaces call center queues — handles inbound calls, resolves tickets, escalates to humans, and integrates with CRMs and helpdesks.</div>
+      <div class="card-tags"><span class="tag">Voice AI</span><span class="tag">Support</span><span class="tag">Call Center</span></div>
       <div class="card-metrics">
-        <div class="metric">
-          <div class="metric-value" style="color:var(--green)">$199-999/mo</div>
-          <div class="metric-label">Pricing</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">$30B+</div>
-          <div class="metric-label">TAM</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">High</div>
-          <div class="metric-label">Build Complexity</div>
-        </div>
+        <div class="mi"><span class="mv">$199–999/mo</span><span class="ml">Pricing</span></div>
+        <div class="mi"><span class="mv">$30B+</span><span class="ml">TAM</span></div>
+        <div class="mi"><span class="mv">High</span><span class="ml">Complexity</span></div>
       </div>
-      <div class="expand-hint">Click to expand →</div>
-      <div class="card-details">
-        <div class="detail-section">
-          <h4>Why This Has High Demand</h4>
-          <p>Voice AI agents replacing call centers deliver 60-80% cost savings with 24/7 availability. Call center costs are $25-65 per resolved issue vs. $0.50-2.00 with AI. This is one of the most profitable and fastest-growing AI niches in 2026.</p>
+      <div class="expand-hint">↗ expand</div>
+      <div class="card-details"><div class="detail-cols">
+        <div>
+          <div class="ds"><h4>Why High Demand</h4><p>Voice AI agents deliver 60–80% cost savings with 24/7 availability. Call center costs $25–65 per resolved issue vs. $0.50–2.00 with AI. One of the fastest-growing AI niches in 2026.</p></div>
+          <div class="ds"><h4>Monetization</h4><p>$199/mo starter (500 min), $499/mo pro (2,500 min + CRM), $999/mo enterprise (unlimited + custom voice + analytics). Plus per-minute overage fees.</p></div>
+          <div class="ds"><h4>Competitive Advantage</h4><p>Target a vertical where the script is predictable: dental offices, auto repair, property management. Niche beats horizontal.</p></div>
         </div>
-        <div class="detail-section">
-          <h4>How to Build with AI SDK</h4>
+        <div><div class="ds"><h4>How to Build with AI SDK</h4>
           <ul>
-            <li>Use AI SDK <strong>Speech & Transcription APIs</strong> (OpenAI, ElevenLabs, Deepgram providers) for real-time voice</li>
-            <li>Use <strong>ToolLoopAgent</strong> for multi-turn conversation management and resolution workflows</li>
-            <li>Use <strong>Tool Calling</strong> to access CRM (Salesforce, HubSpot), ticketing (Zendesk, Intercom), and databases</li>
-            <li>Use <strong>Structured Output</strong> to generate call summaries, ticket updates, and escalation reports</li>
-            <li>Use <strong>AI Gateway</strong> to route to cheaper models for simple queries, premium models for complex ones</li>
+            <li><strong>Speech & Transcription APIs</strong> (OpenAI, ElevenLabs, Deepgram) for real-time voice</li>
+            <li><strong>ToolLoopAgent</strong> for multi-turn conversation and resolution workflows</li>
+            <li><strong>Tool Calling</strong> to access CRM, ticketing (Zendesk, Intercom), databases</li>
+            <li><strong>Structured Output</strong> for call summaries, ticket updates, escalation reports</li>
+            <li><strong>AI Gateway</strong> to route cheap models for simple queries, premium for complex</li>
           </ul>
-          <div class="sdk-features">
-            <span class="sdk-tag">Speech APIs</span>
-            <span class="sdk-tag">ToolLoopAgent</span>
-            <span class="sdk-tag">Tool Calling</span>
-            <span class="sdk-tag">Structured Output</span>
-            <span class="sdk-tag">AI Gateway</span>
-          </div>
-        </div>
-        <div class="detail-section">
-          <h4>Monetization</h4>
-          <p>$199/mo starter (500 minutes), $499/mo pro (2500 minutes + CRM integration), $999/mo enterprise (unlimited + custom voice + analytics). Plus per-minute overage fees.</p>
-        </div>
-        <div class="detail-section">
-          <h4>Competitive Advantage</h4>
-          <p>Target a vertical (e.g., dental offices, auto repair shops, property management) where the script is predictable and integration points are well-defined. Niche beats horizontal.</p>
-        </div>
-      </div>
+          <div class="chips"><span class="chip">Speech APIs</span><span class="chip">ToolLoopAgent</span><span class="chip">Tool Calling</span><span class="chip">Structured Output</span><span class="chip">AI Gateway</span></div>
+        </div></div>
+      </div></div>
     </div>
 
-    <!-- IDEA 3 -->
+    <!-- 3 -->
     <div class="card" data-tags="agent,structured,tool" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon" style="background:rgba(236,72,153,0.12);">&#128200;</div>
-        <div class="card-demand demand-very-high">&#9650; Very High Demand</div>
-      </div>
+      <div class="card-top"><span class="card-icon">📈</span><span class="dtag d-vh"><span class="ddot"></span>Very High</span></div>
       <div class="card-title">AI Sales Outreach Autopilot</div>
-      <div class="card-subtitle">An autonomous agent that researches prospects, writes personalized cold emails, manages follow-ups across email & LinkedIn, qualifies leads, and books meetings — all while you sleep.</div>
-      <div class="card-tags">
-        <span class="tag">Sales Tech</span>
-        <span class="tag">B2B</span>
-        <span class="tag">Lead Gen</span>
-      </div>
+      <div class="card-sub">Autonomous agent that researches prospects, writes personalized cold emails, manages follow-ups across email & LinkedIn, qualifies leads, and books meetings.</div>
+      <div class="card-tags"><span class="tag">Sales Tech</span><span class="tag">B2B</span><span class="tag">Lead Gen</span></div>
       <div class="card-metrics">
-        <div class="metric">
-          <div class="metric-value" style="color:var(--green)">$99-499/mo</div>
-          <div class="metric-label">Pricing</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">$8B+</div>
-          <div class="metric-label">TAM</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">Medium</div>
-          <div class="metric-label">Build Complexity</div>
-        </div>
+        <div class="mi"><span class="mv">$99–499/mo</span><span class="ml">Pricing</span></div>
+        <div class="mi"><span class="mv">$8B+</span><span class="ml">TAM</span></div>
+        <div class="mi"><span class="mv">Medium</span><span class="ml">Complexity</span></div>
       </div>
-      <div class="expand-hint">Click to expand →</div>
-      <div class="card-details">
-        <div class="detail-section">
-          <h4>Why This Has High Demand</h4>
-          <p>B2B sales teams spend 65% of their time on non-selling activities. A fully automated outreach pipeline is the #1 requested AI tool among SMB sales teams. The sales engagement platform market is growing at 15% CAGR.</p>
+      <div class="expand-hint">↗ expand</div>
+      <div class="card-details"><div class="detail-cols">
+        <div>
+          <div class="ds"><h4>Why High Demand</h4><p>B2B sales teams spend 65% of time on non-selling activities. Fully automated outreach is the #1 requested AI tool among SMB sales teams. Market growing at 15% CAGR.</p></div>
+          <div class="ds"><h4>Monetization</h4><p>$99/mo (500 prospects), $299/mo (2,000 + multi-channel), $499/mo (unlimited + team seats + A/B testing). Credits-based overage for high-volume users.</p></div>
+          <div class="ds"><h4>Competitive Advantage</h4><p>Differentiate with "research depth" — the agent spends 30s deeply researching each prospect. Higher reply rates = stickier product.</p></div>
         </div>
-        <div class="detail-section">
-          <h4>How to Build with AI SDK</h4>
+        <div><div class="ds"><h4>How to Build with AI SDK</h4>
           <ul>
-            <li>Use <strong>ToolLoopAgent</strong> for the full pipeline: research → personalize → send → track → follow up</li>
-            <li>Use <strong>Tool Calling</strong> to scrape LinkedIn profiles, query CRM data, check email delivery, and book calendar slots</li>
-            <li>Use <strong>Structured Output</strong> for lead scoring objects: {company, icp_fit, pain_points, personalization_hooks}</li>
-            <li>Use <strong>generateText</strong> for batch email generation with personalization at scale</li>
-            <li>Use <strong>Provider System</strong> to use cheaper models for research, premium models for email writing</li>
+            <li><strong>ToolLoopAgent</strong> for full pipeline: research → personalize → send → track → follow up</li>
+            <li><strong>Tool Calling</strong> to scrape LinkedIn, query CRM, check email delivery, book calendar</li>
+            <li><strong>Structured Output</strong> for lead scoring: {company, icp_fit, pain_points, personalization_hooks}</li>
+            <li><strong>generateText</strong> for batch email generation with personalization at scale</li>
+            <li><strong>Provider System</strong> — cheaper models for research, premium for email writing</li>
           </ul>
-          <div class="sdk-features">
-            <span class="sdk-tag">ToolLoopAgent</span>
-            <span class="sdk-tag">Tool Calling</span>
-            <span class="sdk-tag">Structured Output</span>
-            <span class="sdk-tag">generateText</span>
-            <span class="sdk-tag">Provider System</span>
-          </div>
-        </div>
-        <div class="detail-section">
-          <h4>Monetization</h4>
-          <p>$99/mo (500 prospects/mo), $299/mo (2,000 + multi-channel), $499/mo (unlimited + team seats + A/B testing). Credits-based overage model for high-volume users.</p>
-        </div>
-        <div class="detail-section">
-          <h4>Competitive Advantage</h4>
-          <p>Differentiate with "research depth" — instead of generic templates, the agent spends 30 seconds deeply researching each prospect. Higher reply rates = stickier product.</p>
-        </div>
-      </div>
+          <div class="chips"><span class="chip">ToolLoopAgent</span><span class="chip">Tool Calling</span><span class="chip">Structured Output</span><span class="chip">generateText</span><span class="chip">Provider System</span></div>
+        </div></div>
+      </div></div>
     </div>
 
-    <!-- IDEA 4 -->
+    <!-- 4 -->
     <div class="card" data-tags="structured,tool,streaming,multimodal" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon" style="background:rgba(245,158,11,0.12);">&#127973;</div>
-        <div class="card-demand demand-high">&#9650; High Demand</div>
-      </div>
+      <div class="card-top"><span class="card-icon">🏪</span><span class="dtag d-h"><span class="ddot"></span>High</span></div>
       <div class="card-title">AI Review Manager for Local Business</div>
-      <div class="card-subtitle">Aggregates reviews from Google, Yelp, Facebook, and TripAdvisor — generates smart responses, tracks sentiment trends, and surfaces actionable insights. Built for single-location businesses.</div>
-      <div class="card-tags">
-        <span class="tag">Local Business</span>
-        <span class="tag">Reputation</span>
-        <span class="tag">SMB</span>
-      </div>
+      <div class="card-sub">Aggregates reviews from Google, Yelp, Facebook, TripAdvisor — generates smart responses, tracks sentiment trends, and surfaces actionable insights for single-location businesses.</div>
+      <div class="card-tags"><span class="tag">Local Business</span><span class="tag">Reputation</span><span class="tag">SMB</span></div>
       <div class="card-metrics">
-        <div class="metric">
-          <div class="metric-value" style="color:var(--green)">$29-89/mo</div>
-          <div class="metric-label">Pricing</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">$4B+</div>
-          <div class="metric-label">TAM</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">Low</div>
-          <div class="metric-label">Build Complexity</div>
-        </div>
+        <div class="mi"><span class="mv">$29–89/mo</span><span class="ml">Pricing</span></div>
+        <div class="mi"><span class="mv">$4B+</span><span class="ml">TAM</span></div>
+        <div class="mi"><span class="mv">Low</span><span class="ml">Complexity</span></div>
       </div>
-      <div class="expand-hint">Click to expand →</div>
-      <div class="card-details">
-        <div class="detail-section">
-          <h4>Why This Has High Demand</h4>
-          <p>Single-location small businesses are massively underserved — existing tools target multi-location enterprises at $200+/mo. 88% of consumers trust online reviews as much as personal recommendations. Most small businesses respond to fewer than 30% of reviews.</p>
+      <div class="expand-hint">↗ expand</div>
+      <div class="card-details"><div class="detail-cols">
+        <div>
+          <div class="ds"><h4>Why High Demand</h4><p>Single-location businesses massively underserved — existing tools target enterprises at $200+/mo. 88% of consumers trust online reviews as much as personal recommendations.</p></div>
+          <div class="ds"><h4>Monetization</h4><p>$29/mo (monitoring + alerts), $59/mo (+ AI responses + sentiment), $89/mo (+ weekly reports + competitor tracking). Low AI cost ~$2–5/mo per user = high gross margins.</p></div>
+          <div class="ds"><h4>Competitive Advantage</h4><p>Price at $29/mo where competitors start at $200+. Target specific verticals like restaurants, dentists, or auto shops.</p></div>
         </div>
-        <div class="detail-section">
-          <h4>How to Build with AI SDK</h4>
+        <div><div class="ds"><h4>How to Build with AI SDK</h4>
           <ul>
-            <li>Use <strong>Tool Calling</strong> to pull reviews from Google Places API, Yelp API, Facebook Graph API</li>
-            <li>Use <strong>Structured Output</strong> for sentiment analysis: {rating, sentiment, themes[], suggestedResponse, urgency}</li>
-            <li>Use <strong>streamText</strong> for real-time response drafting with brand voice customization</li>
-            <li>Use <strong>generateText</strong> for weekly digest reports summarizing trends and action items</li>
-            <li>Use <strong>Provider System</strong> — use fast/cheap models (Haiku, GPT-4o-mini) to keep costs at ~$0.01/review</li>
+            <li><strong>Tool Calling</strong> to pull reviews from Google Places, Yelp, Facebook Graph APIs</li>
+            <li><strong>Structured Output</strong> for sentiment: {rating, sentiment, themes[], suggestedResponse, urgency}</li>
+            <li><strong>streamText</strong> for real-time response drafting with brand voice customization</li>
+            <li><strong>generateText</strong> for weekly digest reports summarizing trends</li>
+            <li><strong>Provider System</strong> — fast/cheap models to keep costs at ~$0.01/review</li>
           </ul>
-          <div class="sdk-features">
-            <span class="sdk-tag">Tool Calling</span>
-            <span class="sdk-tag">Structured Output</span>
-            <span class="sdk-tag">streamText</span>
-            <span class="sdk-tag">generateText</span>
-            <span class="sdk-tag">Provider System</span>
-          </div>
-        </div>
-        <div class="detail-section">
-          <h4>Monetization</h4>
-          <p>$29/mo (monitoring + alerts), $59/mo (+ AI responses + sentiment), $89/mo (+ weekly reports + competitor tracking). Extremely low AI cost per user (~$2-5/mo) means high gross margins.</p>
-        </div>
-        <div class="detail-section">
-          <h4>Competitive Advantage</h4>
-          <p>Price at $29/mo where competitors start at $200+. Target specific verticals like restaurants, dentists, or auto shops. The low price point + high value creates viral word-of-mouth in local business communities.</p>
-        </div>
-      </div>
+          <div class="chips"><span class="chip">Tool Calling</span><span class="chip">Structured Output</span><span class="chip">streamText</span><span class="chip">generateText</span><span class="chip">Provider System</span></div>
+        </div></div>
+      </div></div>
     </div>
 
-    <!-- IDEA 5 -->
+    <!-- 5 -->
     <div class="card" data-tags="agent,tool,structured,multimodal" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon" style="background:rgba(99,102,241,0.12);">&#128257;</div>
-        <div class="card-demand demand-very-high">&#9650; Very High Demand</div>
-      </div>
+      <div class="card-top"><span class="card-icon">🔄</span><span class="dtag d-vh"><span class="ddot"></span>Very High</span></div>
       <div class="card-title">Content Repurposing Engine</div>
-      <div class="card-subtitle">Drop in a blog post, podcast, or video transcript — get 15+ platform-optimized outputs: Twitter threads, LinkedIn carousels, Instagram captions, YouTube shorts scripts, newsletters, and more.</div>
-      <div class="card-tags">
-        <span class="tag">Content</span>
-        <span class="tag">Creator Economy</span>
-        <span class="tag">Marketing</span>
-      </div>
+      <div class="card-sub">Drop in a blog post, podcast, or video transcript — get 15+ platform-optimized outputs: Twitter threads, LinkedIn carousels, Instagram captions, YouTube shorts scripts, newsletters.</div>
+      <div class="card-tags"><span class="tag">Content</span><span class="tag">Creator Economy</span><span class="tag">Marketing</span></div>
       <div class="card-metrics">
-        <div class="metric">
-          <div class="metric-value" style="color:var(--green)">$39-199/mo</div>
-          <div class="metric-label">Pricing</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">$12B+</div>
-          <div class="metric-label">TAM</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">Low-Med</div>
-          <div class="metric-label">Build Complexity</div>
-        </div>
+        <div class="mi"><span class="mv">$39–199/mo</span><span class="ml">Pricing</span></div>
+        <div class="mi"><span class="mv">$12B+</span><span class="ml">TAM</span></div>
+        <div class="mi"><span class="mv">Low–Med</span><span class="ml">Complexity</span></div>
       </div>
-      <div class="expand-hint">Click to expand →</div>
-      <div class="card-details">
-        <div class="detail-section">
-          <h4>Why This Has High Demand</h4>
-          <p>Content creators and marketers spend 5-10 hours/week manually repurposing content. Current tools produce generic outputs that don't match platform-specific best practices (hooks, character limits, aspect ratios, hashtag strategies). The creator economy is $250B+ and growing 20% annually.</p>
+      <div class="expand-hint">↗ expand</div>
+      <div class="card-details"><div class="detail-cols">
+        <div>
+          <div class="ds"><h4>Why High Demand</h4><p>Creators spend 5–10 hours/week manually repurposing content. Current tools produce generic outputs that miss platform-specific best practices. Creator economy is $250B+ and growing 20% annually.</p></div>
+          <div class="ds"><h4>Monetization</h4><p>$39/mo creator (10 runs), $99/mo pro (50 runs + scheduling), $199/mo agency (unlimited + white-label + team). Per-run overage at $2/run.</p></div>
+          <div class="ds"><h4>Competitive Advantage</h4><p>Win on quality. Differentiate with platform-native formatting, voice matching, and engagement-optimized hooks based on trending patterns.</p></div>
         </div>
-        <div class="detail-section">
-          <h4>How to Build with AI SDK</h4>
+        <div><div class="ds"><h4>How to Build with AI SDK</h4>
           <ul>
-            <li>Use <strong>ToolLoopAgent</strong> for the repurposing pipeline: analyze → extract key ideas → generate per platform → optimize</li>
-            <li>Use <strong>Structured Output</strong> for platform-specific schemas: {platform, content, hashtags, hook, cta, characterCount}</li>
-            <li>Use <strong>Speech/Transcription APIs</strong> to ingest podcasts and video content as source material</li>
-            <li>Use <strong>generateImage</strong> to create social media graphics and carousel slides</li>
-            <li>Use <strong>Tool Calling</strong> to pull engagement analytics, schedule posts via Buffer/Hootsuite APIs</li>
+            <li><strong>ToolLoopAgent</strong> for repurposing pipeline: analyze → extract → generate per platform → optimize</li>
+            <li><strong>Structured Output</strong> for platform schemas: {platform, content, hashtags, hook, cta, characterCount}</li>
+            <li><strong>Speech/Transcription APIs</strong> to ingest podcasts and video content</li>
+            <li><strong>generateImage</strong> to create social media graphics and carousel slides</li>
+            <li><strong>Tool Calling</strong> to pull analytics, schedule via Buffer/Hootsuite APIs</li>
           </ul>
-          <div class="sdk-features">
-            <span class="sdk-tag">ToolLoopAgent</span>
-            <span class="sdk-tag">Structured Output</span>
-            <span class="sdk-tag">Speech APIs</span>
-            <span class="sdk-tag">generateImage</span>
-            <span class="sdk-tag">Tool Calling</span>
-          </div>
-        </div>
-        <div class="detail-section">
-          <h4>Monetization</h4>
-          <p>$39/mo creator (10 repurposing runs), $99/mo pro (50 runs + scheduling), $199/mo agency (unlimited + white-label + team). Per-run overage at $2/run.</p>
-        </div>
-        <div class="detail-section">
-          <h4>Competitive Advantage</h4>
-          <p>Win on quality, not quantity. Existing tools produce "content slop." Differentiate with platform-native formatting, voice matching, and engagement-optimized hooks based on trending patterns.</p>
-        </div>
-      </div>
+          <div class="chips"><span class="chip">ToolLoopAgent</span><span class="chip">Structured Output</span><span class="chip">Speech APIs</span><span class="chip">generateImage</span><span class="chip">Tool Calling</span></div>
+        </div></div>
+      </div></div>
     </div>
 
-    <!-- IDEA 6 -->
+    <!-- 6 -->
     <div class="card" data-tags="agent,tool,structured,streaming" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon" style="background:rgba(239,68,68,0.12);">&#9876;&#65039;</div>
-        <div class="card-demand demand-high">&#9650; High Demand</div>
-      </div>
+      <div class="card-top"><span class="card-icon">⚕️</span><span class="dtag d-h"><span class="ddot"></span>High</span></div>
       <div class="card-title">AI Medical Documentation Assistant</div>
-      <div class="card-subtitle">Listens to patient-doctor conversations, generates structured clinical notes (SOAP format), codes diagnoses (ICD-10), and pushes to EHR systems — saving doctors 2+ hours daily.</div>
-      <div class="card-tags">
-        <span class="tag">Healthcare</span>
-        <span class="tag">Documentation</span>
-        <span class="tag">Clinical</span>
-      </div>
+      <div class="card-sub">Listens to patient-doctor conversations, generates structured clinical notes (SOAP format), codes diagnoses (ICD-10), and pushes to EHR systems — saving doctors 2+ hours daily.</div>
+      <div class="card-tags"><span class="tag">Healthcare</span><span class="tag">Documentation</span><span class="tag">Clinical</span></div>
       <div class="card-metrics">
-        <div class="metric">
-          <div class="metric-value" style="color:var(--green)">$199-599/mo</div>
-          <div class="metric-label">Pricing</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">$10B+</div>
-          <div class="metric-label">TAM</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">High</div>
-          <div class="metric-label">Build Complexity</div>
-        </div>
+        <div class="mi"><span class="mv">$199–599/mo</span><span class="ml">Pricing</span></div>
+        <div class="mi"><span class="mv">$10B+</span><span class="ml">TAM</span></div>
+        <div class="mi"><span class="mv">High</span><span class="ml">Complexity</span></div>
       </div>
-      <div class="expand-hint">Click to expand →</div>
-      <div class="card-details">
-        <div class="detail-section">
-          <h4>Why This Has High Demand</h4>
-          <p>55% of healthcare providers want AI for admin tasks. Doctors spend 2+ hours daily on documentation. Medical scribe services cost $25-50/hour. Burnout from documentation is the #1 reason doctors leave practice. This is a problem worth paying a premium to solve.</p>
+      <div class="expand-hint">↗ expand</div>
+      <div class="card-details"><div class="detail-cols">
+        <div>
+          <div class="ds"><h4>Why High Demand</h4><p>55% of healthcare providers want AI for admin tasks. Doctors spend 2+ hours daily on documentation. Medical scribe services cost $25–50/hour. Burnout from documentation is the #1 reason doctors leave practice.</p></div>
+          <div class="ds"><h4>Monetization</h4><p>$199/mo solo practitioner, $399/mo small practice (5 providers), $599/mo clinic (unlimited + EHR). Annual contracts with 20% discount.</p></div>
+          <div class="ds"><h4>Competitive Advantage</h4><p>Target a specialty first — dermatology or primary care. Specialty-specific templates and vocabulary accuracy win trust faster than generic tools.</p></div>
         </div>
-        <div class="detail-section">
-          <h4>How to Build with AI SDK</h4>
+        <div><div class="ds"><h4>How to Build with AI SDK</h4>
           <ul>
-            <li>Use <strong>Speech/Transcription APIs</strong> (Deepgram, OpenAI Whisper) for real-time medical conversation capture</li>
-            <li>Use <strong>Structured Output</strong> for SOAP notes: {subjective, objective, assessment, plan, icd10Codes[], cptCodes[]}</li>
-            <li>Use <strong>ToolLoopAgent</strong> to validate codes against medical databases and check for completeness</li>
-            <li>Use <strong>Tool Calling</strong> to push completed notes to EHR systems (Epic, Cerner via FHIR APIs)</li>
-            <li>Use <strong>Human-in-the-Loop</strong> for doctor approval before notes are finalized and submitted</li>
+            <li><strong>Speech/Transcription APIs</strong> (Deepgram, OpenAI Whisper) for medical conversation capture</li>
+            <li><strong>Structured Output</strong> for SOAP notes: {subjective, objective, assessment, plan, icd10Codes[], cptCodes[]}</li>
+            <li><strong>ToolLoopAgent</strong> to validate codes against medical databases</li>
+            <li><strong>Tool Calling</strong> to push notes to EHR systems (Epic, Cerner via FHIR APIs)</li>
+            <li><strong>Human-in-the-Loop</strong> for doctor approval before notes are finalized</li>
           </ul>
-          <div class="sdk-features">
-            <span class="sdk-tag">Speech APIs</span>
-            <span class="sdk-tag">Structured Output</span>
-            <span class="sdk-tag">ToolLoopAgent</span>
-            <span class="sdk-tag">Tool Calling</span>
-            <span class="sdk-tag">Human-in-the-Loop</span>
-          </div>
-        </div>
-        <div class="detail-section">
-          <h4>Monetization</h4>
-          <p>$199/mo solo practitioner, $399/mo small practice (5 providers), $599/mo clinic (unlimited + EHR integration). Annual contracts with 20% discount. Implementation fees for enterprise.</p>
-        </div>
-        <div class="detail-section">
-          <h4>Competitive Advantage</h4>
-          <p>Target a specialty first (e.g., dermatology or primary care) and become the "best AI scribe for [specialty]." Specialty-specific templates and vocabulary accuracy win trust faster than generic tools.</p>
-        </div>
-      </div>
+          <div class="chips"><span class="chip">Speech APIs</span><span class="chip">Structured Output</span><span class="chip">ToolLoopAgent</span><span class="chip">Tool Calling</span><span class="chip">Human-in-the-Loop</span></div>
+        </div></div>
+      </div></div>
     </div>
 
-    <!-- IDEA 7 -->
+    <!-- 7 -->
     <div class="card" data-tags="agent,tool,structured" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon" style="background:rgba(34,197,94,0.12);">&#128176;</div>
-        <div class="card-demand demand-high">&#9650; High Demand</div>
-      </div>
+      <div class="card-top"><span class="card-icon">💰</span><span class="dtag d-h"><span class="ddot"></span>High</span></div>
       <div class="card-title">AI Bookkeeper & Financial Copilot</div>
-      <div class="card-subtitle">Connects to bank feeds and invoicing tools, auto-categorizes transactions, reconciles accounts, flags anomalies, generates financial reports, and answers natural-language finance questions.</div>
-      <div class="card-tags">
-        <span class="tag">FinTech</span>
-        <span class="tag">Accounting</span>
-        <span class="tag">SMB</span>
-      </div>
+      <div class="card-sub">Connects to bank feeds and invoicing tools, auto-categorizes transactions, reconciles accounts, flags anomalies, generates reports, and answers natural-language finance questions.</div>
+      <div class="card-tags"><span class="tag">FinTech</span><span class="tag">Accounting</span><span class="tag">SMB</span></div>
       <div class="card-metrics">
-        <div class="metric">
-          <div class="metric-value" style="color:var(--green)">$49-249/mo</div>
-          <div class="metric-label">Pricing</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">$7B+</div>
-          <div class="metric-label">TAM</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">Medium</div>
-          <div class="metric-label">Build Complexity</div>
-        </div>
+        <div class="mi"><span class="mv">$49–249/mo</span><span class="ml">Pricing</span></div>
+        <div class="mi"><span class="mv">$7B+</span><span class="ml">TAM</span></div>
+        <div class="mi"><span class="mv">Medium</span><span class="ml">Complexity</span></div>
       </div>
-      <div class="expand-hint">Click to expand →</div>
-      <div class="card-details">
-        <div class="detail-section">
-          <h4>Why This Has High Demand</h4>
-          <p>SMBs spend $1,000-5,000/month on bookkeeping. 60% of small business owners say accounting is the task they'd most like to automate. QuickBooks and Xero are powerful but not smart — they still require significant manual effort for categorization and reconciliation.</p>
+      <div class="expand-hint">↗ expand</div>
+      <div class="card-details"><div class="detail-cols">
+        <div>
+          <div class="ds"><h4>Why High Demand</h4><p>SMBs spend $1,000–5,000/month on bookkeeping. 60% of small business owners say accounting is the task they'd most like to automate. QuickBooks/Xero still require significant manual effort.</p></div>
+          <div class="ds"><h4>Monetization</h4><p>$49/mo freelancer, $149/mo small business (up to 1,000 txns), $249/mo growth (unlimited + multi-entity + tax prep exports). Bookkeeper/CPA partner program for referrals.</p></div>
+          <div class="ds"><h4>Competitive Advantage</h4><p>Position as a layer on top of QuickBooks/Xero. Natural language Q&A — "How much did I spend on marketing last quarter?" — is the killer feature competitors lack.</p></div>
         </div>
-        <div class="detail-section">
-          <h4>How to Build with AI SDK</h4>
+        <div><div class="ds"><h4>How to Build with AI SDK</h4>
           <ul>
-            <li>Use <strong>ToolLoopAgent</strong> for automated reconciliation workflows — fetch → categorize → match → flag → report</li>
-            <li>Use <strong>Tool Calling</strong> to connect Plaid (bank feeds), Stripe, QuickBooks, Xero APIs</li>
-            <li>Use <strong>Structured Output</strong> for transaction objects: {category, vendor, amount, taxDeductible, confidence}</li>
-            <li>Use <strong>streamText</strong> for a chat interface where owners ask "How much did I spend on marketing last quarter?"</li>
-            <li>Use <strong>Human-in-the-Loop</strong> for flagging uncertain categorizations for owner review</li>
+            <li><strong>ToolLoopAgent</strong> for reconciliation: fetch → categorize → match → flag → report</li>
+            <li><strong>Tool Calling</strong> to connect Plaid, Stripe, QuickBooks, Xero APIs</li>
+            <li><strong>Structured Output</strong> for transactions: {category, vendor, amount, taxDeductible, confidence}</li>
+            <li><strong>streamText</strong> for chat: "How much did I spend on marketing last quarter?"</li>
+            <li><strong>Human-in-the-Loop</strong> for flagging uncertain categorizations for owner review</li>
           </ul>
-          <div class="sdk-features">
-            <span class="sdk-tag">ToolLoopAgent</span>
-            <span class="sdk-tag">Tool Calling</span>
-            <span class="sdk-tag">Structured Output</span>
-            <span class="sdk-tag">streamText</span>
-            <span class="sdk-tag">Human-in-the-Loop</span>
-          </div>
-        </div>
-        <div class="detail-section">
-          <h4>Monetization</h4>
-          <p>$49/mo freelancer, $149/mo small business (up to 1,000 txns/mo), $249/mo growth (unlimited + multi-entity + tax prep exports). Bookkeeper/CPA partner program for referrals.</p>
-        </div>
-        <div class="detail-section">
-          <h4>Competitive Advantage</h4>
-          <p>Position as a "layer on top of" QuickBooks/Xero, not a replacement. Reduce friction by integrating with what people already use. The natural language Q&A is the killer feature competitors lack.</p>
-        </div>
-      </div>
+          <div class="chips"><span class="chip">ToolLoopAgent</span><span class="chip">Tool Calling</span><span class="chip">Structured Output</span><span class="chip">streamText</span><span class="chip">Human-in-the-Loop</span></div>
+        </div></div>
+      </div></div>
     </div>
 
-    <!-- IDEA 8 -->
+    <!-- 8 -->
     <div class="card" data-tags="agent,tool,multimodal,streaming" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon" style="background:rgba(6,182,212,0.12);">&#127891;</div>
-        <div class="card-demand demand-high">&#9650; High Demand</div>
-      </div>
+      <div class="card-top"><span class="card-icon">🎓</span><span class="dtag d-h"><span class="ddot"></span>High</span></div>
       <div class="card-title">AI Tutor & Exam Prep Platform</div>
-      <div class="card-subtitle">A personalized AI tutor that adapts to each student's knowledge gaps, generates practice questions, provides step-by-step explanations, and simulates real exam conditions for certifications and standardized tests.</div>
-      <div class="card-tags">
-        <span class="tag">EdTech</span>
-        <span class="tag">Test Prep</span>
-        <span class="tag">B2C + B2B</span>
-      </div>
+      <div class="card-sub">Personalized AI tutor that adapts to each student's knowledge gaps, generates practice questions, provides step-by-step explanations, and simulates real exam conditions for certifications.</div>
+      <div class="card-tags"><span class="tag">EdTech</span><span class="tag">Test Prep</span><span class="tag">B2C + B2B</span></div>
       <div class="card-metrics">
-        <div class="metric">
-          <div class="metric-value" style="color:var(--green)">$19-79/mo</div>
-          <div class="metric-label">Pricing</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">$20B+</div>
-          <div class="metric-label">TAM</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">Medium</div>
-          <div class="metric-label">Build Complexity</div>
-        </div>
+        <div class="mi"><span class="mv">$19–79/mo</span><span class="ml">Pricing</span></div>
+        <div class="mi"><span class="mv">$20B+</span><span class="ml">TAM</span></div>
+        <div class="mi"><span class="mv">Medium</span><span class="ml">Complexity</span></div>
       </div>
-      <div class="expand-hint">Click to expand →</div>
-      <div class="card-details">
-        <div class="detail-section">
-          <h4>Why This Has High Demand</h4>
-          <p>The global test prep market is $20B+. Private tutoring costs $40-150/hour. Professional certifications (AWS, PMP, CPA, Bar exam) have massive audiences willing to pay for effective prep. Current tools are static — they don't adapt to individual weaknesses.</p>
+      <div class="expand-hint">↗ expand</div>
+      <div class="card-details"><div class="detail-cols">
+        <div>
+          <div class="ds"><h4>Why High Demand</h4><p>Global test prep market is $20B+. Private tutoring costs $40–150/hour. Current tools are static — they don't adapt to individual weaknesses. Professional certifications have massive audiences willing to pay.</p></div>
+          <div class="ds"><h4>Monetization</h4><p>$19/mo basic (1 exam track), $49/mo pro (all exams + analytics), $79/mo premium (+ mock exams + study plan). B2B licensing for boot camps at $500–2,000/mo.</p></div>
+          <div class="ds"><h4>Competitive Advantage</h4><p>Pick ONE high-value certification (e.g., AWS Solutions Architect) and become the undisputed best prep tool for it. Depth over breadth. Publish pass rate improvements as social proof.</p></div>
         </div>
-        <div class="detail-section">
-          <h4>How to Build with AI SDK</h4>
+        <div><div class="ds"><h4>How to Build with AI SDK</h4>
           <ul>
-            <li>Use <strong>streamText</strong> for real-time, conversational tutoring with Socratic method teaching</li>
-            <li>Use <strong>Structured Output</strong> for question generation: {question, options[], correctAnswer, explanation, difficulty, topic}</li>
-            <li>Use <strong>ToolLoopAgent</strong> for adaptive learning — assess → identify gaps → generate targeted practice → reassess</li>
-            <li>Use <strong>Tool Calling</strong> to query question banks, track student progress in DB, adjust difficulty curves</li>
-            <li>Use <strong>AI Gateway</strong> to use fast models for question generation, premium models for nuanced explanations</li>
+            <li><strong>streamText</strong> for real-time conversational tutoring with Socratic method</li>
+            <li><strong>Structured Output</strong> for question generation: {question, options[], correctAnswer, explanation, difficulty, topic}</li>
+            <li><strong>ToolLoopAgent</strong> for adaptive learning: assess → identify gaps → generate targeted practice → reassess</li>
+            <li><strong>Tool Calling</strong> to query question banks, track progress, adjust difficulty curves</li>
+            <li><strong>AI Gateway</strong> to use fast models for generation, premium for nuanced explanations</li>
           </ul>
-          <div class="sdk-features">
-            <span class="sdk-tag">streamText</span>
-            <span class="sdk-tag">Structured Output</span>
-            <span class="sdk-tag">ToolLoopAgent</span>
-            <span class="sdk-tag">Tool Calling</span>
-            <span class="sdk-tag">AI Gateway</span>
-          </div>
-        </div>
-        <div class="detail-section">
-          <h4>Monetization</h4>
-          <p>$19/mo basic (1 exam track), $49/mo pro (all exams + analytics), $79/mo premium (+ mock exams + study plan). B2B licensing for boot camps and training companies at $500-2,000/mo.</p>
-        </div>
-        <div class="detail-section">
-          <h4>Competitive Advantage</h4>
-          <p>Pick ONE high-value certification (e.g., AWS Solutions Architect, or a medical board exam) and become the undisputed best prep tool for it. Depth > breadth. Publish pass rate improvements as social proof.</p>
-        </div>
-      </div>
+          <div class="chips"><span class="chip">streamText</span><span class="chip">Structured Output</span><span class="chip">ToolLoopAgent</span><span class="chip">Tool Calling</span><span class="chip">AI Gateway</span></div>
+        </div></div>
+      </div></div>
     </div>
 
-    <!-- IDEA 9 -->
+    <!-- 9 -->
     <div class="card" data-tags="agent,tool,structured,streaming" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon" style="background:rgba(236,72,153,0.12);">&#128269;</div>
-        <div class="card-demand demand-very-high">&#9650; Very High Demand</div>
-      </div>
+      <div class="card-top"><span class="card-icon">🔍</span><span class="dtag d-vh"><span class="ddot"></span>Very High</span></div>
       <div class="card-title">AI Recruiting Copilot</div>
-      <div class="card-subtitle">An agent that sources candidates from job boards and LinkedIn, screens resumes against custom criteria, conducts async AI interviews, ranks applicants, and generates shortlists — for niche/underserved job verticals.</div>
-      <div class="card-tags">
-        <span class="tag">HR Tech</span>
-        <span class="tag">Recruiting</span>
-        <span class="tag">Niche Verticals</span>
-      </div>
+      <div class="card-sub">Agent that sources candidates, screens resumes, conducts async AI interviews, ranks applicants, and generates shortlists — for niche and underserved job verticals.</div>
+      <div class="card-tags"><span class="tag">HR Tech</span><span class="tag">Recruiting</span><span class="tag">Niche Verticals</span></div>
       <div class="card-metrics">
-        <div class="metric">
-          <div class="metric-value" style="color:var(--green)">$149-499/mo</div>
-          <div class="metric-label">Pricing</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">$18B+</div>
-          <div class="metric-label">TAM</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">Medium</div>
-          <div class="metric-label">Build Complexity</div>
-        </div>
+        <div class="mi"><span class="mv">$149–499/mo</span><span class="ml">Pricing</span></div>
+        <div class="mi"><span class="mv">$18B+</span><span class="ml">TAM</span></div>
+        <div class="mi"><span class="mv">Medium</span><span class="ml">Complexity</span></div>
       </div>
-      <div class="expand-hint">Click to expand →</div>
-      <div class="card-details">
-        <div class="detail-section">
-          <h4>Why This Has High Demand</h4>
-          <p>Recruiters spend 23 hours on average to fill a single role. LinkedIn and Indeed underserve skilled trades, healthcare technicians, and specialized creative roles. External recruiting agencies charge 15-25% of annual salary. An AI that handles 80% of screening is worth a fortune.</p>
+      <div class="expand-hint">↗ expand</div>
+      <div class="card-details"><div class="detail-cols">
+        <div>
+          <div class="ds"><h4>Why High Demand</h4><p>Recruiters spend 23 hours on average to fill a single role. LinkedIn underserves skilled trades, healthcare technicians, and creative roles. External agencies charge 15–25% of annual salary.</p></div>
+          <div class="ds"><h4>Monetization</h4><p>$149/mo (3 active job posts), $299/mo (10 posts + AI interviews), $499/mo (unlimited + ATS + analytics). Per-hire success fees as optional premium tier.</p></div>
+          <div class="ds"><h4>Competitive Advantage</h4><p>Target underserved verticals where LinkedIn is weak: skilled trades, healthcare support staff, hospitality. Build industry-specific screening criteria generic ATS tools can't match.</p></div>
         </div>
-        <div class="detail-section">
-          <h4>How to Build with AI SDK</h4>
+        <div><div class="ds"><h4>How to Build with AI SDK</h4>
           <ul>
-            <li>Use <strong>ToolLoopAgent</strong> for the full pipeline: source → screen → rank → interview → shortlist</li>
-            <li>Use <strong>Structured Output</strong> for candidate profiles: {name, skills[], experience, fitScore, redFlags[], recommendation}</li>
-            <li>Use <strong>Tool Calling</strong> to query job boards, parse resumes (PDF extraction), check references, schedule interviews</li>
-            <li>Use <strong>streamText</strong> for async AI interviews with dynamic follow-up questions</li>
-            <li>Use <strong>Human-in-the-Loop</strong> for hiring manager approval at each funnel stage</li>
+            <li><strong>ToolLoopAgent</strong> for full pipeline: source → screen → rank → interview → shortlist</li>
+            <li><strong>Structured Output</strong> for profiles: {name, skills[], experience, fitScore, redFlags[], recommendation}</li>
+            <li><strong>Tool Calling</strong> to query job boards, parse resumes (PDF), schedule interviews</li>
+            <li><strong>streamText</strong> for async AI interviews with dynamic follow-up questions</li>
+            <li><strong>Human-in-the-Loop</strong> for hiring manager approval at each funnel stage</li>
           </ul>
-          <div class="sdk-features">
-            <span class="sdk-tag">ToolLoopAgent</span>
-            <span class="sdk-tag">Structured Output</span>
-            <span class="sdk-tag">Tool Calling</span>
-            <span class="sdk-tag">streamText</span>
-            <span class="sdk-tag">Human-in-the-Loop</span>
-          </div>
-        </div>
-        <div class="detail-section">
-          <h4>Monetization</h4>
-          <p>$149/mo (3 active job posts), $299/mo (10 posts + AI interviews), $499/mo (unlimited + ATS integration + analytics). Per-hire success fees as an optional premium tier.</p>
-        </div>
-        <div class="detail-section">
-          <h4>Competitive Advantage</h4>
-          <p>Target underserved verticals where LinkedIn is weak: skilled trades, healthcare support staff, hospitality. Build industry-specific screening criteria that generic ATS tools can't match.</p>
-        </div>
-      </div>
+          <div class="chips"><span class="chip">ToolLoopAgent</span><span class="chip">Structured Output</span><span class="chip">Tool Calling</span><span class="chip">streamText</span><span class="chip">Human-in-the-Loop</span></div>
+        </div></div>
+      </div></div>
     </div>
 
-    <!-- IDEA 10 -->
+    <!-- 10 -->
     <div class="card" data-tags="agent,tool,structured,multimodal" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon" style="background:rgba(99,102,241,0.12);">&#128737;&#65039;</div>
-        <div class="card-demand demand-high">&#9650; High Demand</div>
-      </div>
+      <div class="card-top"><span class="card-icon">🛡️</span><span class="dtag d-h"><span class="ddot"></span>High</span></div>
       <div class="card-title">AI Cybersecurity Monitor for SMBs</div>
-      <div class="card-subtitle">A lightweight agent-based security tool that monitors endpoints, detects anomalies, scans for vulnerabilities, generates compliance reports, and alerts on threats — at a price point SMBs can actually afford.</div>
-      <div class="card-tags">
-        <span class="tag">Cybersecurity</span>
-        <span class="tag">Compliance</span>
-        <span class="tag">SMB</span>
-      </div>
+      <div class="card-sub">Lightweight agent-based security tool that monitors endpoints, detects anomalies, scans for vulnerabilities, generates compliance reports, and alerts on threats — at an SMB price point.</div>
+      <div class="card-tags"><span class="tag">Cybersecurity</span><span class="tag">Compliance</span><span class="tag">SMB</span></div>
       <div class="card-metrics">
-        <div class="metric">
-          <div class="metric-value" style="color:var(--green)">$79-399/mo</div>
-          <div class="metric-label">Pricing</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">$25B+</div>
-          <div class="metric-label">TAM</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">High</div>
-          <div class="metric-label">Build Complexity</div>
-        </div>
+        <div class="mi"><span class="mv">$79–399/mo</span><span class="ml">Pricing</span></div>
+        <div class="mi"><span class="mv">$25B+</span><span class="ml">TAM</span></div>
+        <div class="mi"><span class="mv">High</span><span class="ml">Complexity</span></div>
       </div>
-      <div class="expand-hint">Click to expand →</div>
-      <div class="card-details">
-        <div class="detail-section">
-          <h4>Why This Has High Demand</h4>
-          <p>43% of cyberattacks target small businesses, but only 14% are prepared. Enterprise security tools cost $10K+/year. SMBs need a "set it and forget it" solution that doesn't require a dedicated security team. Compliance requirements (SOC2, HIPAA, GDPR) are increasingly expected even from small vendors.</p>
+      <div class="expand-hint">↗ expand</div>
+      <div class="card-details"><div class="detail-cols">
+        <div>
+          <div class="ds"><h4>Why High Demand</h4><p>43% of cyberattacks target small businesses, but only 14% are prepared. Enterprise security tools cost $10K+/year. Compliance requirements (SOC2, HIPAA, GDPR) are increasingly expected even from small vendors.</p></div>
+          <div class="ds"><h4>Monetization</h4><p>$79/mo essentials (monitoring + alerts), $199/mo pro (+ compliance reports + vulnerability scanning), $399/mo managed (+ remediation + quarterly review).</p></div>
+          <div class="ds"><h4>Competitive Advantage</h4><p>Translate security jargon into business language. The killer feature: a "compliance readiness score" that tells SMBs exactly how close they are to SOC2/HIPAA and what to fix next.</p></div>
         </div>
-        <div class="detail-section">
-          <h4>How to Build with AI SDK</h4>
+        <div><div class="ds"><h4>How to Build with AI SDK</h4>
           <ul>
-            <li>Use <strong>ToolLoopAgent</strong> for continuous monitoring loops — scan → detect → classify → alert → remediate</li>
-            <li>Use <strong>Structured Output</strong> for threat reports: {severity, type, affectedSystem, recommendation, complianceImpact}</li>
-            <li>Use <strong>Tool Calling</strong> to query vulnerability databases (CVE), run port scans, check SSL certificates, pull log data</li>
-            <li>Use <strong>generateText</strong> for plain-English threat explanations non-technical owners can understand</li>
-            <li>Use <strong>Human-in-the-Loop</strong> before executing any remediation actions (firewall rules, patches)</li>
+            <li><strong>ToolLoopAgent</strong> for continuous monitoring: scan → detect → classify → alert → remediate</li>
+            <li><strong>Structured Output</strong> for threat reports: {severity, type, affectedSystem, recommendation, complianceImpact}</li>
+            <li><strong>Tool Calling</strong> to query CVE databases, run port scans, check SSL, pull log data</li>
+            <li><strong>generateText</strong> for plain-English threat explanations non-technical owners understand</li>
+            <li><strong>Human-in-the-Loop</strong> before executing any remediation actions</li>
           </ul>
-          <div class="sdk-features">
-            <span class="sdk-tag">ToolLoopAgent</span>
-            <span class="sdk-tag">Structured Output</span>
-            <span class="sdk-tag">Tool Calling</span>
-            <span class="sdk-tag">generateText</span>
-            <span class="sdk-tag">Human-in-the-Loop</span>
-          </div>
-        </div>
-        <div class="detail-section">
-          <h4>Monetization</h4>
-          <p>$79/mo essentials (monitoring + alerts), $199/mo pro (+ compliance reports + vulnerability scanning), $399/mo managed (+ remediation + quarterly review). Annual compliance report generation as a one-time upsell.</p>
-        </div>
-        <div class="detail-section">
-          <h4>Competitive Advantage</h4>
-          <p>Translate security jargon into business language. The killer feature is a "compliance readiness score" that tells SMBs exactly how close they are to SOC2/HIPAA compliance and what to fix next. Sell the peace of mind, not the tech.</p>
-        </div>
-      </div>
+          <div class="chips"><span class="chip">ToolLoopAgent</span><span class="chip">Structured Output</span><span class="chip">Tool Calling</span><span class="chip">generateText</span><span class="chip">Human-in-the-Loop</span></div>
+        </div></div>
+      </div></div>
     </div>
 
   </div>
 
-  <!-- Ranking Summary -->
-  <div class="section-header" style="margin-top:32px;">
-    <h2>Quick-Start Rankings</h2>
-    <h3>Which idea should you build first?</h3>
+  <hr class="divider">
+
+  <p class="slabel">Quick-Start Rankings</p>
+  <table class="dtable">
+    <thead>
+      <tr>
+        <th>Product Idea</th><th>Demand</th><th>Build Effort</th><th>Revenue Potential</th><th>Solo-Founder Friendly</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>AI Review Manager</td><td><span class="td td-h">High</span></td><td>Low</td><td>$50K–500K ARR</td><td class="sg">★★★★★</td></tr>
+      <tr><td>Content Repurposing Engine</td><td><span class="td td-vh">Very High</span></td><td>Low–Med</td><td>$100K–1M ARR</td><td class="sg">★★★★★</td></tr>
+      <tr><td>AI Sales Outreach Autopilot</td><td><span class="td td-vh">Very High</span></td><td>Medium</td><td>$500K–5M ARR</td><td class="so">★★★★</td></tr>
+      <tr><td>AI Bookkeeper & Copilot</td><td><span class="td td-h">High</span></td><td>Medium</td><td>$200K–2M ARR</td><td class="so">★★★★</td></tr>
+      <tr><td>AI Contract Review</td><td><span class="td td-vh">Very High</span></td><td>Medium</td><td>$500K–5M ARR</td><td class="so">★★★</td></tr>
+      <tr><td>AI Tutor & Exam Prep</td><td><span class="td td-h">High</span></td><td>Medium</td><td>$100K–2M ARR</td><td class="so">★★★★</td></tr>
+      <tr><td>AI Recruiting Copilot</td><td><span class="td td-vh">Very High</span></td><td>Medium</td><td>$500K–5M ARR</td><td class="so">★★★</td></tr>
+      <tr><td>Voice AI Support Agent</td><td><span class="td td-vh">Very High</span></td><td>High</td><td>$1M–10M ARR</td><td class="so">★★★</td></tr>
+      <tr><td>AI Medical Documentation</td><td><span class="td td-h">High</span></td><td>High</td><td>$1M–10M ARR</td><td class="sr">★★</td></tr>
+      <tr><td>AI Cybersecurity Monitor</td><td><span class="td td-h">High</span></td><td>High</td><td>$500K–5M ARR</td><td class="sr">★★</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <p>Research compiled March 2026 — Based on analysis of <a href="https://ai-sdk.dev">ai-sdk.dev</a>, market research, and demand signals.</p>
+    <p>SDK capabilities mapped: generateText · streamText · Structured Output · Tool Calling · ToolLoopAgent · Human-in-the-Loop · generateImage · Speech APIs · AI Gateway · Provider System</p>
   </div>
 
-  <div class="sdk-overview" style="margin-bottom:32px;">
-    <table style="width:100%;border-collapse:collapse;font-size:14px;">
-      <thead>
-        <tr style="border-bottom:2px solid var(--border);text-align:left;">
-          <th style="padding:12px 8px;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;">Product Idea</th>
-          <th style="padding:12px 8px;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;">Demand</th>
-          <th style="padding:12px 8px;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;">Build Effort</th>
-          <th style="padding:12px 8px;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;">Revenue Potential</th>
-          <th style="padding:12px 8px;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;">Solo-Founder Friendly</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:12px 8px;font-weight:600;">AI Review Manager</td>
-          <td style="padding:12px 8px;color:var(--green);">High</td>
-          <td style="padding:12px 8px;">Low</td>
-          <td style="padding:12px 8px;">$50K-500K ARR</td>
-          <td style="padding:12px 8px;color:var(--green);">★★★★★</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:12px 8px;font-weight:600;">Content Repurposing Engine</td>
-          <td style="padding:12px 8px;color:var(--red);">Very High</td>
-          <td style="padding:12px 8px;">Low-Med</td>
-          <td style="padding:12px 8px;">$100K-1M ARR</td>
-          <td style="padding:12px 8px;color:var(--green);">★★★★★</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:12px 8px;font-weight:600;">AI Sales Outreach Autopilot</td>
-          <td style="padding:12px 8px;color:var(--red);">Very High</td>
-          <td style="padding:12px 8px;">Medium</td>
-          <td style="padding:12px 8px;">$500K-5M ARR</td>
-          <td style="padding:12px 8px;color:var(--orange);">★★★★</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:12px 8px;font-weight:600;">AI Bookkeeper & Copilot</td>
-          <td style="padding:12px 8px;color:var(--green);">High</td>
-          <td style="padding:12px 8px;">Medium</td>
-          <td style="padding:12px 8px;">$200K-2M ARR</td>
-          <td style="padding:12px 8px;color:var(--orange);">★★★★</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:12px 8px;font-weight:600;">AI Contract Review</td>
-          <td style="padding:12px 8px;color:var(--red);">Very High</td>
-          <td style="padding:12px 8px;">Medium</td>
-          <td style="padding:12px 8px;">$500K-5M ARR</td>
-          <td style="padding:12px 8px;color:var(--orange);">★★★</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:12px 8px;font-weight:600;">AI Tutor & Exam Prep</td>
-          <td style="padding:12px 8px;color:var(--green);">High</td>
-          <td style="padding:12px 8px;">Medium</td>
-          <td style="padding:12px 8px;">$100K-2M ARR</td>
-          <td style="padding:12px 8px;color:var(--orange);">★★★★</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:12px 8px;font-weight:600;">AI Recruiting Copilot</td>
-          <td style="padding:12px 8px;color:var(--red);">Very High</td>
-          <td style="padding:12px 8px;">Medium</td>
-          <td style="padding:12px 8px;">$500K-5M ARR</td>
-          <td style="padding:12px 8px;color:var(--orange);">★★★</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:12px 8px;font-weight:600;">Voice AI Support Agent</td>
-          <td style="padding:12px 8px;color:var(--red);">Very High</td>
-          <td style="padding:12px 8px;">High</td>
-          <td style="padding:12px 8px;">$1M-10M ARR</td>
-          <td style="padding:12px 8px;color:var(--orange);">★★★</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:12px 8px;font-weight:600;">AI Medical Documentation</td>
-          <td style="padding:12px 8px;color:var(--green);">High</td>
-          <td style="padding:12px 8px;">High</td>
-          <td style="padding:12px 8px;">$1M-10M ARR</td>
-          <td style="padding:12px 8px;color:var(--red);">★★</td>
-        </tr>
-        <tr>
-          <td style="padding:12px 8px;font-weight:600;">AI Cybersecurity Monitor</td>
-          <td style="padding:12px 8px;color:var(--green);">High</td>
-          <td style="padding:12px 8px;">High</td>
-          <td style="padding:12px 8px;">$500K-5M ARR</td>
-          <td style="padding:12px 8px;color:var(--red);">★★</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-</div>
-
-<div class="footer">
-  <p>Research compiled March 2026 — Based on analysis of ai-sdk.dev, market research, and demand signals.</p>
-  <p style="margin-top:8px;">AI SDK capabilities mapped: generateText, streamText, Structured Output, Tool Calling, ToolLoopAgent, Human-in-the-Loop, generateImage, Speech APIs, AI Gateway, Provider System</p>
 </div>
 
 <script>
-  function toggleCard(card) {
-    const wasExpanded = card.classList.contains('expanded');
-    // Close all
-    document.querySelectorAll('.card').forEach(c => c.classList.remove('expanded'));
-    // Toggle
-    if (!wasExpanded) {
-      card.classList.add('expanded');
-      setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
-    }
-  }
-
-  function filterCards(tag) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
-
-    document.querySelectorAll('.card').forEach(card => {
-      if (tag === 'all') {
-        card.style.display = '';
-      } else {
-        const tags = card.dataset.tags || '';
-        card.style.display = tags.includes(tag) ? '' : 'none';
-      }
-      card.classList.remove('expanded');
-    });
-  }
+function toggleCard(card) {
+  const was = card.classList.contains('expanded');
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('expanded'));
+  if (!was) { card.classList.add('expanded'); setTimeout(() => card.scrollIntoView({behavior:'smooth',block:'nearest'}), 100); }
+}
+function filterCards(tag) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.card').forEach(card => {
+    card.style.display = (tag === 'all' || (card.dataset.tags||'').includes(tag)) ? '' : 'none';
+    card.classList.remove('expanded');
+  });
+}
 </script>
-
 </body>
 </html>
